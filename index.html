@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</body>
+<form id="form"  >
+    <input type="text" name="" id="name">
+    <input type="text" name="" id="lastName">
+    <button type="submit">Save</button>
+</form>
+<h1 id="displayData"></h1>
+<h1 id="displayData2"></h1>
+<script  src="./20_LocalStrorage_SessionStrorage.js" >
+    const sessionForm = document.getElementById('form');
+        const displayData2 = document.getElementById('displayData2');
+
+        // Function to save user input to sessionStorage
+        sessionForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const lastName = document.getElementById('lastName').value;
+
+            // Save name and email as an object in sessionStorage
+            sessionStorage.setItem('sessionUserData', JSON.stringify({ name, lastName }));
+
+            // Display the saved data
+            displaySessionUserData();
+        });
+
+        // Function to display saved data on page load
+        function displaySessionUserData() {
+            const sessionUserData = JSON.parse(sessionStorage.getItem('sessionUserData'));
+            if (sessionUserData) {
+                displayData2.textContent = `This is sessionStorage, Name: ${sessionUserData.name}, lastname: ${sessionUserData.lastName}`;
+            }
+        }
+
+        // Display data on page load
+        window.onload = displaySessionUserData;
+</script>
+</html>
